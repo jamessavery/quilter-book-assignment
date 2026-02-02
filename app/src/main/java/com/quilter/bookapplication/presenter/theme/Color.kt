@@ -1,4 +1,4 @@
-package com.quilter.bookapplication.ui.theme
+package com.quilter.bookapplication.presenter.theme
 
 import androidx.compose.ui.graphics.Color
 
