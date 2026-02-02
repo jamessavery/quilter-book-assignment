@@ -1,4 +1,4 @@
-package com.quilter.bookapplication.presenter.theme
+package com.quilter.bookapplication.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

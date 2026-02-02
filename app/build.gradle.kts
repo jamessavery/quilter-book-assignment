@@ -64,7 +64,30 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
+    // D_N on prod app this would be extracted & organised into the catalog
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    // Network
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("com.squareup.retrofit2:converter-kotlinx-serialization:3.0.0")
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    // Rx
+    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.8.1")
+
+    // Paging
+    implementation("androidx.paging:paging-runtime:3.4.0")
+    implementation("androidx.paging:paging-rxjava3:3.4.0")
+    implementation("androidx.paging:paging-compose:3.4.0")
+
+    // Coil
+    implementation("io.coil-kt.coil3:coil-compose:3.3.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
 }
