@@ -33,11 +33,10 @@ fun <T : Any> PagingStateHandler(
         }
 
         is LoadState.Error -> {
-            if (isEmpty) {
-                // TODO JIMMY
-            } else {
-                content()
-            }
+            GenericErrorScreen(
+                error = refreshState.error,
+                onRetry = { pagingItems.retry() }
+            )
         }
 
         is LoadState.NotLoading -> {

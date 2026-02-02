@@ -26,7 +26,7 @@ class BookViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     val booksPagingData: Flow<PagingData<Book>> = _selectedSubject
         .flatMapLatest { chosenSubject ->
-            bookRepository.getSubjectBooksStream(chosenSubject.name.lowercase())
+            bookRepository.getSubjectBooksStream(chosenSubject.apiValue)
                 .asFlow()
                 .cachedIn(viewModelScope)
         }
@@ -35,8 +35,14 @@ class BookViewModel @Inject constructor(
         _selectedSubject.value = subject
     }
 
-    enum class Subject {
-        PROGRAMMING, DESIGN, MANAGEMENT
+    // N.b. Api is case sensitive
+    enum class Subject(
+        val apiValue: String,
+        val displayName: String
+    ) {
+        PROGRAMMING("programming", "Programming"),
+        MANAGEMENT("management", "Management"),
+        DESIGN("design", "Design")
     }
 
 }

@@ -27,6 +27,9 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -52,6 +55,7 @@ fun BookScreen(
 ) {
     val lazyPagingItems = viewModel.booksPagingData.collectAsLazyPagingItems()
     val selectedSubject by viewModel.selectedSubject.collectAsStateWithLifecycle()
+    var selectedBookBottomSheet by remember { mutableStateOf<Book?>(null) }
 
     Scaffold { padding ->
         Column(
@@ -67,7 +71,7 @@ fun BookScreen(
                     FilterChip(
                         selected = (selectedSubject == subject),
                         onClick = { viewModel.onUserChooseSubject(subject) },
-                        label = { Text(subject.name) },
+                        label = { Text(subject.displayName) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                             selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -79,11 +83,17 @@ fun BookScreen(
             PagingStateHandler(pagingItems = lazyPagingItems) {
                 BooksPagingList(
                     lazyPagingItems = lazyPagingItems,
-                    onBookItemClick = {
-                        // TODO
-                    }
+                    onBookItemClick = { book -> selectedBookBottomSheet = book }
                 )
             }
+        }
+
+        // Book Details BottomSheet
+        selectedBookBottomSheet?.let { book ->
+            BookDetailsBottomSheet(
+                book = book,
+                onDismiss = { selectedBookBottomSheet = null }
+            )
         }
     }
 }
