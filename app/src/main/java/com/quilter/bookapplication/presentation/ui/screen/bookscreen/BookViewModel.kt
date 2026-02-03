@@ -28,8 +28,7 @@ class BookViewModel @Inject constructor(
         .flatMapLatest { chosenSubject ->
             bookRepository.getSubjectBooksStream(chosenSubject.apiValue)
                 .asFlow()
-                .cachedIn(viewModelScope)
-        }
+        }.cachedIn(viewModelScope)
 
     fun onUserChooseSubject(subject: Subject) {
         _selectedSubject.value = subject

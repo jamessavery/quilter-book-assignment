@@ -18,9 +18,6 @@ class BookPagingSource(
         val page = params.key ?: 0
         val pageSize = params.loadSize
 
-        println("JIMMY page -> $page")
-        println("JIMMY loadSingle -> ${params.loadSize}")
-
         return api.getSubjectBooks(
             subject = subject,
             limit = pageSize,
